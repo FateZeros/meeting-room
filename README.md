@@ -34,7 +34,10 @@ npm test
 
 ## 项目目录规划
 
-## github命令
+## github 添加已存在的项目到Github
+``` bash
+git push -u origin master
+```
 
 
 
