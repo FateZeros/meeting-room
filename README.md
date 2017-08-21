@@ -32,6 +32,11 @@ npm run e2e
 npm test
 ```
 
+## 引入chart.js
+```bash
+npm install chart.js --save
+```
+
 ## 项目目录规划
 
 ## github 添加已存在的项目到Github
@@ -40,5 +45,7 @@ git push -u origin master
 ```
 
 
+## 参考
+[chart.js](https://github.com/chartjs/Chart.js)
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

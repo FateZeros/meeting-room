@@ -42,6 +42,7 @@
 		  </el-form-item>
 		</el-form>
 		<div class="room-use">
+			<room-using></room-using>
 			<el-row>
 				<span>预约日期</span>
 				<el-date-picker
@@ -52,58 +53,61 @@
 		      :picker-options="pickerOptions">
 		    </el-date-picker>
 			</el-row>
-			<el-table>
-			</el-table>
 		</div>
 	</div>
 </template>
 
 <script>
-	export default {
-	  data () {
-	    return {
-	      form: {
-	        room: '',
-	        startTime: '',
-	        endTime: ''
-	      },
-	      rules: {
-	        room: [
-	          { required: true, message: '请选择会议室' }
-	        ],
-	        startTime: [
-	          { required: true, message: '请选择开始时间', trigger: 'change' }
-	        ],
-	        endTime: [
-	          { required: true, message: '请选择结束时间', trigger: 'change' }
-	        ]
-	      },
-	      pickerOptions: {
-	        disabledDate (time) {
-	          return time.getTime() < Date.now() - 8.64e7
-	        }
-	      },
-	      choosedDay: ''
-	    }
-	  },
-	  methods: {
-	    onSubmit (formName) {
-	      this.$refs[formName].validate((valid) => {
-	        console.log(valid)
-	        if (valid) {
-	          console.log('submit', this.form.room, this.form.startTime)
-	        } else {
-	          return false
-	        }
-	      })
-	    },
-	    onChoosedDayChange (choosedDay) {
-	      if (choosedDay) {
-	        console.log(choosedDay)
-	      }
-	    }
-	  }
-	}
+import RoomUsing from '../chart/roomUsing.vue'
+
+export default {
+  data () {
+    return {
+      form: {
+        room: '',
+        startTime: '',
+        endTime: ''
+      },
+      rules: {
+        room: [
+          { required: true, message: '请选择会议室' }
+        ],
+        startTime: [
+          { required: true, message: '请选择开始时间', trigger: 'change' }
+        ],
+        endTime: [
+          { required: true, message: '请选择结束时间', trigger: 'change' }
+        ]
+      },
+      pickerOptions: {
+        disabledDate (time) {
+          return time.getTime() < Date.now() - 8.64e7
+        }
+      },
+      choosedDay: ''
+    }
+  },
+  methods: {
+    onSubmit (formName) {
+      this.$refs[formName].validate((valid) => {
+        console.log(valid)
+        if (valid) {
+          console.log('submit', this.form.room, this.form.startTime)
+        } else {
+          return false
+        }
+      })
+    },
+    onChoosedDayChange (choosedDay) {
+      if (choosedDay) {
+        console.log(choosedDay)
+      }
+    }
+  },
+  components: {
+    RoomUsing
+  }
+}
 </script>
 
 <style>
