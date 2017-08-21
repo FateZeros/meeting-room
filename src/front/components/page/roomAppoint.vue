@@ -42,6 +42,7 @@
 		  </el-form-item>
 		</el-form>
 		<div class="room-use">
+			<div class="room-title">会议室使用情况</div>
 			<room-using></room-using>
 			<el-row>
 				<span>预约日期</span>
@@ -113,5 +114,10 @@ export default {
 <style>
 .room-use {
 	height: 100%;
+	font-size: 14px;
+}
+
+.room-title {
+	text-align: center;
 }
 </style>
