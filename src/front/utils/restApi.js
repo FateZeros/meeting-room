@@ -4,9 +4,9 @@ export function makeRequest ({ url, method = 'get', data = {} }) {
   return new Promise((resolve, reject) => {
     Vue.http[method](url, data)
       .then(response => {
-        const { code, msg } = response.data
+        const { code, msg, records } = response.data
         if (code === 200) {
-          resolve(msg)
+          resolve({ code, msg, records })
         } else {
           reject({ code, msg })
         }

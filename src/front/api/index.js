@@ -8,3 +8,10 @@ export function Login (data) {
     data
   })
 }
+
+// 获取会议室使用情况
+export function getRoomUsing (day) {
+  return makeRequest({
+    url: `/api/room/${day}`
+  })
+}

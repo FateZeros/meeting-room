@@ -1,0 +1,35 @@
+[
+  {
+    "type": "Room",
+    "room": "爱情岛",
+    "usingDay": "2017-08-23",
+    "roomUse": [{
+    	"user": "开发部A",
+    	"usingTime": [0, 1]
+    }, {
+    	"user": "开发部B",
+    	"usingTime": [11, 13]
+    }]
+  },
+  {
+    "type": "Room",
+    "room": "阿拉斯加",
+    "usingDay": "2017-08-23",
+    "roomUse": [{
+    	"user": "开发部C",
+    	"usingTime": [0, 2]
+    }, {
+        "user": "开发部E",
+        "usingTime": [8, 9]
+    }]
+  },
+  {
+    "type": "Room",
+    "room": "阿拉斯加",
+    "usingDay": "2017-08-24",
+    "roomUse": [{
+    	"user": "开发部D",
+    	"usingTime": [7, 11]
+    }]
+  }
+]

@@ -43,7 +43,9 @@
 		</el-form>
 		<div class="room-use">
 			<div class="room-title">会议室使用情况</div>
-			<room-using></room-using>
+			<room-using
+			  ref="roomUsingChart"
+			/>
 			<el-row>
 				<span>预约日期</span>
 				<el-date-picker
@@ -85,7 +87,7 @@ export default {
           return time.getTime() < Date.now() - 8.64e7
         }
       },
-      choosedDay: ''
+      choosedDay: Date.now()
     }
   },
   methods: {
@@ -102,6 +104,7 @@ export default {
     onChoosedDayChange (choosedDay) {
       if (choosedDay) {
         console.log(choosedDay)
+        this.$refs.roomUsingChart.getRoomsData(choosedDay)
       }
     }
   },
