@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Login from '@/front/components/page/Login.vue'
+import Register from '@/front/components/page/Register.vue'
 import Home from '@/front/components/page/Home.vue'
 import RoomAppoint from '@/front/components/page/roomAppoint.vue'
 import MyAppoint from '@/front/components/page/myAppoint.vue'
@@ -31,6 +32,10 @@ export default new Router({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '/register',
+      component: Register
     }
   ]
 })

@@ -32,9 +32,34 @@ npm run e2e
 npm test
 ```
 
-## 引入chart.js
+## 引入g2
 ```bash
-npm install chart.js --save
+npm install g2 --save
+```
+
+### 安装 nodemon
+```bash
+npm install --save nodemon
+```
+
+### 安装mongoose
+``` bash
+npm install --save mongoose
+```
+
+### 安装express
+```bash
+npm install --save express body-parser
+```
+
+### 安装jwt
+```bash
+npm install --save jsonwebtoken
+```
+
+### 安装bcrypt
+```bash
+npm install --save bcrypt
 ```
 
 ## 项目目录规划

@@ -1,13 +1,88 @@
 <template>
 	<div class="login">
-		<el-form class="demo-ruleForm login-form" label-width="60px">
-			<el-form-item label="用户名">
-				<el-input>
+		<el-form class="demo-ruleForm login-form" :model="loginForm" :rules="loginRule" ref="loginForm">
+			<el-form-item label="用户名" prop="userName">
+				<el-input v-model.tirm="loginForm.userName">
 				</el-input>
 			</el-form-item>
+			<el-form-item label="密码" prop="password">
+				<el-input type="password" v-model.trim="loginForm.password">
+				</el-input>
+			</el-form-item>
+			<p class="input-tip">
+				{{inputErr}}
+			</p>
+			<el-form-item>
+		    <el-button type="primary" @click="doLogin('loginForm')">登录</el-button>
+		    <el-button @click="doRegister()">注册</el-button>
+		  </el-form-item>
 		</el-form>
 	</div>
 </template>
+
+<script>
+import { Login } from '@/front/api'
+
+export default {
+  data () {
+    return {
+      loginForm: {
+        userName: '',
+        password: ''
+      },
+      loginRule: {
+        userName: [
+          { required: true, message: '请输入用户名' }
+        ],
+        password: [
+          { required: true, message: '请输入密码' }
+        ]
+      },
+      inputErr: ''
+    }
+  },
+  methods: {
+    doLogin (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          console.log('submit', this.loginForm.userName, this.loginForm.password)
+          // this.$http.post('/api/login').then(res => {
+          //   console.log(res)
+          // })
+          const LoginData = { username: this.loginForm.userName, password: this.loginForm.password }
+          Login(LoginData).then(() => {
+            this.$router.push({ path: '/home' })
+          }).catch(({ code, msg }) => {
+            if (code === -1) {
+              this.$message({
+                message: msg,
+                type: 'error',
+                duration: 2000
+              })
+            } else {
+              this.inputErr = msg
+            }
+          })
+        } else {
+          return false
+        }
+      })
+    },
+    doRegister () {
+      this.$router.push({ path: '/register' })
+    },
+    clearTip () {
+      this.inputErr = ''
+    }
+  },
+  watch: {
+    loginForm: {
+      handler: 'clearTip',
+      deep: true
+    }
+  }
+}
+</script>
 
 <style>
 .login {
@@ -21,11 +96,17 @@
 }
 
 .login-form {
-	width: 400px;
+	width: 300px;
 	height: 300px;
 	background: #fff;
 	border-radius: 10px;
 	margin: 240px auto;
-	padding: 80px 16px 16px;
+	padding: 16px;
+}
+
+.input-tip {
+	text-align: center;
+	color: rgb(255, 0, 0);
+	font-size: 12px;
 }
 </style>
