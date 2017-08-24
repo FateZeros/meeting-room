@@ -24,16 +24,24 @@
     data () {
       return {
         items: [{
-          icon: 'el-icon-setting',
+          icon: 'el-icon-date',
           index: '/home',
-          title: '预约'
+          title: '预约记录'
         }, {
           icon: 'el-icon-document',
           index: 'mine',
-          title: '我的',
+          title: '我的预约',
           subs: [{
             index: '/my-appoint',
             title: '预约记录'
+          }]
+        }, {
+          icon: 'el-icon-setting',
+          index: '/setting',
+          title: '系统设置',
+          subs: [{
+            index: '/set-rooms',
+            title: '会议室管理'
           }]
         }]
       }

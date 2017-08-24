@@ -5,7 +5,10 @@ import Login from '@/front/components/page/Login.vue'
 import Register from '@/front/components/page/Register.vue'
 import Home from '@/front/components/page/Home.vue'
 import RoomAppoint from '@/front/components/page/roomAppoint.vue'
-import MyAppoint from '@/front/components/page/myAppoint.vue'
+
+import MyAppoint from '@/front/components/page/mine/myAppoint.vue'
+
+import SetRooms from '@/front/components/page/setting/roomSetting.vue'
 
 Vue.use(Router)
 
@@ -26,6 +29,10 @@ export default new Router({
         {
           path: '/my-appoint',
           component: MyAppoint
+        },
+        {
+          path: '/set-rooms',
+          component: SetRooms
         }
       ]
     },

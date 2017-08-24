@@ -17,7 +17,6 @@ import { dateFormat } from '@/front/utils'
 // ]
 
 export default {
-  props: ['usingDate'],
   data () {
     return {
       roomUsingData: [],
