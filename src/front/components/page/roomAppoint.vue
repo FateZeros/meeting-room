@@ -1,17 +1,37 @@
 <template>
 	<div>
-		<el-form :inline="true" :model="form" :rules="rules" ref="appointForm" class="demo-form-inline">
-			<el-form-item label="会议室" prop="room">
-				<el-select v-model="form.room" placeholder="请选择会议室">
-		      <el-option label="爱琴岛" value="room-1"></el-option>
-		      <el-option label="马尔代夫" value="room-2"></el-option>
-		    </el-select>
-			</el-form-item>
-			<el-form-item label="预约时间" required>
-				<el-col :span="11">
-					<el-form-item prop="startTime">
+		<el-form label-width="80px" :model="form" :rules="rules" ref="appointForm">
+			<el-row>
+				<el-col :span="7">
+					<el-form-item label="会议室" prop="room">
+						<el-select v-model="form.room" placeholder="请选择会议室">
+				      <el-option
+				      	v-for="room in RoomList"
+				      	:key="room.value"
+				      	:label="room.label"
+				      	:value="room.value"
+				      >
+				      </el-option>
+				    </el-select>
+					</el-form-item>
+				</el-col>
+				<el-col :span="7">
+					<el-form-item label="预约日期" required>
+						<el-date-picker
+				      v-model="choosedDay"
+				      type="date"
+				      placeholder="选择日期"
+				      @change="onChoosedDayChange"
+				      :picker-options="pickerOptions">
+				    </el-date-picker>
+					</el-form-item>
+				</el-col>
+			</el-row>
+			<el-row>
+				<el-col :span="7">
+					<el-form-item label="开始时间" prop="startTime" required>
 						<el-time-select
-					    placeholder="起始时间"
+					    placeholder="开始时间"
 					    v-model="form.startTime"
 					    :picker-options="{
 					      start: '09:00',
@@ -19,11 +39,10 @@
 					      end: '18:00'
 					    }">
 				  	</el-time-select>
-			  	</el-form-item>
-			  </el-col>
-			  <el-col class="line" :span="2">-</el-col>
-			  <el-col :span="11">
-			  	<el-form-item prop="endTime">
+				  </el-form-item>
+				</el-col>
+			  <el-col :span="7">
+			  	<el-form-item label="结束时间" prop="endTime" required>
 				  	<el-time-select
 					    placeholder="结束时间"
 					    v-model="form.endTime"
@@ -35,33 +54,26 @@
 					    }">
 				  	</el-time-select>
 			  	</el-form-item>
-		  	</el-col>
-			</el-form-item>
-			<el-form-item>
-		    <el-button type="primary" @click="onSubmit('appointForm')">预约会议室</el-button>
-		  </el-form-item>
+			  </el-col>
+				<el-col :span="4">
+			    <el-button type="primary" @click="onSubmit('appointForm')">预约会议室</el-button>
+			  </el-col>
+		  </el-row>
 		</el-form>
 		<div class="room-use">
 			<div class="room-title">会议室使用情况</div>
 			<room-using
 			  ref="roomUsingChart"
 			/>
-			<el-row>
-				<span>预约日期</span>
-				<el-date-picker
-		      v-model="choosedDay"
-		      type="date"
-		      placeholder="选择日期"
-		      @change="onChoosedDayChange"
-		      :picker-options="pickerOptions">
-		    </el-date-picker>
-			</el-row>
 		</div>
 	</div>
 </template>
 
 <script>
 import RoomUsing from '../chart/roomUsing.vue'
+import { getRoomList, appointRoom } from '@/front/api'
+import { dateFormat, getKeyByValue } from '@/front/utils'
+import appointTime from '@/front/utils/appointTime.js'
 
 export default {
   data () {
@@ -87,15 +99,43 @@ export default {
           return time.getTime() < Date.now() - 8.64e7
         }
       },
-      choosedDay: Date.now()
+      choosedDay: dateFormat(new Date(), 'yyyy-MM-dd'),
+      RoomList: []
     }
+  },
+  created () {
+    this.getRoomListData()
   },
   methods: {
     onSubmit (formName) {
       this.$refs[formName].validate((valid) => {
-        console.log(valid)
         if (valid) {
-          console.log('submit', this.form.room, this.form.startTime)
+          const appointData = {
+            room: this.form.room,
+            roomUser: 'YJF',
+            usingDay: this.choosedDay,
+            startTime: getKeyByValue(this.form.startTime, appointTime),
+            endTime: getKeyByValue(this.form.endTime, appointTime)
+          }
+          console.log('submit', appointData)
+          appointRoom(appointData)
+          .then(({ msg }) => {
+            this.$message({
+              message: msg,
+              type: 'success',
+              duration: 2000
+            })
+          })
+          .then(() => {
+            this.$refs.roomUsingChart.getRoomsData(this.choosedDay)
+          })
+          .catch(({ code, msg }) => {
+            this.$message({
+              message: msg,
+              type: 'error',
+              duration: 2000
+            })
+          })
         } else {
           return false
         }
@@ -103,10 +143,25 @@ export default {
     },
     onChoosedDayChange (choosedDay) {
       if (choosedDay) {
-        console.log(choosedDay)
+        this.choosedDay = choosedDay
         this.$refs.roomUsingChart.getRoomsData(choosedDay)
       }
+    },
+    getRoomListData () {
+      getRoomList()
+      .then(({ records }) => {
+        this.RoomList = records.map(({ roomName }) => ({ label: roomName, value: roomName }))
+      })
+      .catch(({ code, msg }) => {
+        this.$message({
+          message: msg,
+          type: 'error',
+          duration: 2000
+        })
+      })
     }
+  },
+  mounted () {
   },
   components: {
     RoomUsing

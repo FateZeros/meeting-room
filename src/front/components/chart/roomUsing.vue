@@ -4,7 +4,7 @@
 
 <script>
 import G2 from 'g2'
-import appointTime from './appointTime.js'
+import appointTime from '@/front/utils/appointTime.js'
 import { getRoomUsing } from '@/front/api'
 import { dateFormat } from '@/front/utils'
 // const data = [

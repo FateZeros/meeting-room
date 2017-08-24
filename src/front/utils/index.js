@@ -36,3 +36,9 @@ export function dateFormat (time, fmt) {
   }
   return fmt
 }
+
+// 根据value值获取key值
+export function getKeyByValue (value, obj) {
+  const keysArr = Object.keys(obj)
+  return keysArr.filter(item => { return obj[item] === value })[0]
+}

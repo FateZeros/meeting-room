@@ -85,7 +85,7 @@ export default {
       getRoomList()
       .then(({ records }) => {
         records.forEach(item => {
-          item.createDate = dateFormat(new Date(item.createDate.toString()), 'yyyy-MM-dd')
+          item.createDate = dateFormat(new Date(item.createDate.toString()), 'yyyy-MM-dd hh:mm:ss')
           this.RoomList.push(item)
         })
       })

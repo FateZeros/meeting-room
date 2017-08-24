@@ -16,6 +16,15 @@ export function getRoomUsing (day) {
   })
 }
 
+// 预约会议室
+export function appointRoom (data) {
+  return makeRequest({
+    url: '/api/appointRoom',
+    method: 'post',
+    data
+  })
+}
+
 // 获取会议室列表
 export function getRoomList () {
   return makeRequest({
@@ -32,6 +41,7 @@ export function addRoom (data) {
   })
 }
 
+// 删除会议室
 export function deleteRoom (roomName) {
   return makeRequest({
     url: `/api/roomList/${roomName}`,
