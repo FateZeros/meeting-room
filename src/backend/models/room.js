@@ -4,12 +4,10 @@ const Schema = mongoose.Schema
 const roomSchema = new Schema({
   room: {
     type: String,
-    unique: true,
     require: true
   },
   usingDay: {
   	type: Date,
-  	unique: true,
   	require: true
   },
   roomUse: [{

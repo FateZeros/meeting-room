@@ -22,14 +22,5 @@
         "user": "开发部E",
         "usingTime": [8, 9]
     }]
-  },
-  {
-    "type": "Room",
-    "room": "巴厘岛",
-    "usingDay": "2017-08-24",
-    "roomUse": [{
-    	"user": "开发部D",
-    	"usingTime": [7, 11]
-    }]
   }
 ]

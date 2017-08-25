@@ -47,7 +47,7 @@ export default {
         }
       })
       // 载入数据源
-      chart.source(this.roomUsingData, {
+      chart.source([], {
         room: {
           alias: '会议室'
         },
@@ -86,6 +86,7 @@ export default {
     },
     getRoomsData (day) {
       getRoomUsing(day).then(({ records }) => {
+        this.roomUsingData = records
         // 强行使用此行清楚canvas缓存 不然会有x轴显示对应不上
         this.chartObj.changeData([])
         let chartData = []

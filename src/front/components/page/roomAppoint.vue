@@ -117,25 +117,33 @@ export default {
             startTime: getKeyByValue(this.form.startTime, appointTime),
             endTime: getKeyByValue(this.form.endTime, appointTime)
           }
-          console.log('submit', appointData)
-          appointRoom(appointData)
-          .then(({ msg }) => {
-            this.$message({
-              message: msg,
-              type: 'success',
-              duration: 2000
+          // console.log('submit', appointData)
+          if (this.checkRoomUse(appointData.startTime, appointData.endTime)) {
+            appointRoom(appointData)
+            .then(({ msg }) => {
+              this.$message({
+                message: msg,
+                type: 'success',
+                duration: 2000
+              })
             })
-          })
-          .then(() => {
-            this.$refs.roomUsingChart.getRoomsData(this.choosedDay)
-          })
-          .catch(({ code, msg }) => {
+            .then(() => {
+              this.$refs.roomUsingChart.getRoomsData(this.choosedDay)
+            })
+            .catch(({ code, msg }) => {
+              this.$message({
+                message: msg,
+                type: 'error',
+                duration: 2000
+              })
+            })
+          } else {
             this.$message({
-              message: msg,
+              message: '预约时间有冲突哦～',
               type: 'error',
-              duration: 2000
+              duration: 1000
             })
-          })
+          }
         } else {
           return false
         }
@@ -159,9 +167,30 @@ export default {
           duration: 2000
         })
       })
+    },
+    checkRoomUse (startTime, endTime) {
+      const roomUseData = this.$refs.roomUsingChart.roomUsingData
+      let isPass = true
+      console.log(roomUseData, this.form.room)
+      if (roomUseData.length !== 0) {
+        const curRoomuseData = roomUseData.filter(item => item.room === this.form.room)
+        if (curRoomuseData.length !== 0) {
+          const [{ roomUse }] = curRoomuseData
+          roomUse.forEach(oldRoom => {
+            if (startTime >= oldRoom.usingTime[0] && startTime < oldRoom.usingTime[1]) {
+              isPass = false
+            }
+            if (endTime > oldRoom.usingTime[0] && endTime <= oldRoom.usingTime[1]) {
+              isPass = false
+            }
+            if (startTime <= oldRoom.usingTime[0] && endTime >= oldRoom.usingTime[1]) {
+              isPass = false
+            }
+          })
+        }
+      }
+      return isPass
     }
-  },
-  mounted () {
   },
   components: {
     RoomUsing
