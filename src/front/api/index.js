@@ -25,6 +25,13 @@ export function appointRoom (data) {
   })
 }
 
+// 获取 我的会议室预约
+export function getMyAppoints (query) {
+  return makeRequest({
+    url: `/api/myAppoint/${query}`
+  })
+}
+
 // 获取会议室列表
 export function getRoomList () {
   return makeRequest({

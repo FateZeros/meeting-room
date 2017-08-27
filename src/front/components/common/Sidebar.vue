@@ -33,7 +33,7 @@
           title: '我的预约',
           subs: [{
             index: '/my-appoint',
-            title: '预约记录'
+            title: '预约管理'
           }]
         }, {
           icon: 'el-icon-setting',
