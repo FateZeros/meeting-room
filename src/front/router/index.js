@@ -9,6 +9,8 @@ import RoomAppoint from '@/front/components/page/roomAppoint.vue'
 import MyAppoint from '@/front/components/page/mine/myAppoint.vue'
 
 import SetRooms from '@/front/components/page/setting/roomSetting.vue'
+import SetUser from '@/front/components/page/setting/userSetting.vue'
+import SetOrg from '@/front/components/page/setting/orgSetting.vue'
 
 Vue.use(Router)
 
@@ -33,6 +35,14 @@ export default new Router({
         {
           path: '/set-rooms',
           component: SetRooms
+        },
+        {
+          path: '/set-user',
+          component: SetUser
+        },
+        {
+          path: '/set-org',
+          component: SetOrg
         }
       ]
     },

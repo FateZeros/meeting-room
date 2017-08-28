@@ -42,6 +42,12 @@
           subs: [{
             index: '/set-rooms',
             title: '会议室管理'
+          }, {
+            index: '/set-user',
+            title: '用户管理'
+          }, {
+            index: '/set-org',
+            title: '组织管理'
           }]
         }]
       }

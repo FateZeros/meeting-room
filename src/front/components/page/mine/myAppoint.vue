@@ -62,6 +62,7 @@
       </el-table-column>
       <el-table-column
         label="操作"
+        width="200px"
        >
         <template scope="scope">
           <el-button type="text" size="small">通知参会人员</el-button>
@@ -78,7 +79,8 @@ import { dateFormat } from '@/front/utils'
 
 // const appointObj = {
 //   '0': '已取消',
-//   '1': '预约中'
+//   '1': '预约中',
+//   '2': '已过期'
 // }
 
 const tableData = [{
