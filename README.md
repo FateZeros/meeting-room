@@ -62,6 +62,13 @@ npm install --save jsonwebtoken
 npm install --save bcrypt
 ```
 
+### webpack 无法解析vue-jsx语法
+```bash
+npm install --save-dev babel-plugin-syntax-jsx babel-plugin-transform-vue-jsx
+```
+在.babelrc中添加
+"plugins": ["transform-vue-jsx"]
+
 ## 项目目录规划
 
 ## github 添加已存在的项目到Github
