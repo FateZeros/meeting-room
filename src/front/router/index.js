@@ -12,6 +12,8 @@ import SetRooms from '@/front/components/page/setting/roomSetting.vue'
 import SetUser from '@/front/components/page/setting/userSetting.vue'
 import SetOrg from '@/front/components/page/setting/orgSetting.vue'
 
+import UserEdit from '@/front/components/page/setting/userEdit.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -39,6 +41,10 @@ export default new Router({
         {
           path: '/set-user',
           component: SetUser
+        },
+        {
+          path: '/set-user/edit',
+          component: UserEdit
         },
         {
           path: '/set-org',
