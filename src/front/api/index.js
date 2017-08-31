@@ -64,3 +64,43 @@ export function addUser (data) {
     data
   })
 }
+
+// 获取用户列表
+export function getUserList () {
+  return makeRequest({
+    url: '/api/userList'
+  })
+}
+
+// 删除用户 根据邮箱地址 进行删除
+export function deleteUser (email) {
+  return makeRequest({
+    url: `/api/user/${email}`,
+    method: 'delete'
+  })
+}
+
+// 获取单个用户
+export function getUser (email) {
+  return makeRequest({
+    url: `/api/user/${email}`
+  })
+}
+
+// 编辑单个用户
+export function editUser (data) {
+  return makeRequest({
+    url: '/api/user',
+    method: 'post',
+    data
+  })
+}
+
+// 重置密码
+export function resetPasswd (email) {
+  return makeRequest({
+    url: '/api/resetpwd',
+    method: 'post',
+    data: { email }
+  })
+}

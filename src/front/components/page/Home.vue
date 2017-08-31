@@ -4,10 +4,8 @@
     <v-sidebar></v-sidebar>
     <div class="content">
       <transition name="move" mode="out-in">
-        <keep-alive>
-          <router-view>
-          </router-view>
-        </keep-alive>
+        <router-view :key="key">
+        </router-view>
       </transition>
     </div>
   </div>
@@ -24,6 +22,11 @@ export default {
   components: {
     vHeader,
     vSidebar
+  },
+  computed: {
+    key () {
+      return this.$router.path !== undefined ? this.$router.path + +new Date() : this.$router + +new Date()
+    }
   }
 }
 </script>

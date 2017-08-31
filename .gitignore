@@ -10,6 +10,9 @@ selenium-debug.log
 
 src/backend/credentials.js
 
+# question
+QUESTION.md
+
 # Editor directories and files
 .idea
 *.suo

@@ -42,7 +42,7 @@
       </el-table-column>
       <el-table-column
         label="用户角色"
-        prop="roleName"
+        prop="userRight"
       >
       </el-table-column>
       <el-table-column
@@ -50,8 +50,9 @@
         width="200px"
        >
         <template scope="scope">
-          <el-button type="text" size="small" @click="onEditUser(scope.row.userId)">编辑</el-button>
-          <el-button type="text" size="small">删除</el-button>
+          <el-button type="text" size="small" @click="onEditUser(scope.row.email)">编辑</el-button>
+          <el-button type="text" size="small" @click="onDeleteUser(scope.row.email)">删除</el-button>
+          <el-button type="text" size="small" @click="onResetPasswd(scope.row.email)">重置密码</el-button>
         </template>
       </el-table-column>
 		</el-table>
@@ -68,15 +69,12 @@ const options = [{
   }]
 }]
 
-const userTable = [{
-  userId: 'user-1',
-  username: 'user1',
-  department: '部门A',
-  email: '49029032@qq.com',
-  roleName: '普通用户'
-}]
+import { getUserList, deleteUser, resetPasswd } from '@/front/api'
 
 export default {
+  created () {
+    this.getUserData()
+  },
   data () {
     return {
       userForm: {
@@ -84,19 +82,51 @@ export default {
       },
       orgOptions: options,
       selectedOptions: [],
-      userTable: userTable
+      userTable: []
     }
   },
   methods: {
+    getUserData () {
+      getUserList().then(({ records }) => {
+        this.userTable = records
+      })
+    },
     handleChange (value) {
       console.log(value)
     },
     handleAddUser () {
       this.$router.push({ name: 'userEdit' })
     },
-    onEditUser (userId) {
-      this.$router.push({ name: 'userEdit', query: { userId } })
+    onEditUser (email) {
+      this.$router.push({ name: 'userEdit', query: { email } })
+    },
+    onDeleteUser (email) {
+      this.$confirm('确定要删除吗？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        deleteUser(email)
+        .then(() => {
+          this.userTable = this.userTable.filter(user => user.email !== email)
+        })
+        .catch(({ msg }) => {
+          this.$message({
+            message: msg,
+            type: 'error',
+            duration: 2000
+          })
+        })
+      })
+    },
+    onResetPasswd (email) {
+      this.$confirm('确定要重置密码吗？', '提示', {
+        type: 'warning'
+      }).then(() => {
+        resetPasswd(email)
+      })
     }
+  },
+  watch: {
+    '$route': 'getUserData'
   }
 }
 </script>
