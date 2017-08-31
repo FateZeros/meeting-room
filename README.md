@@ -62,6 +62,11 @@ npm install --save jsonwebtoken
 npm install --save bcrypt
 ```
 
+### 发邮件功能
+```bash
+npm install --save nodemailer nodemailer-smtp-transport
+```
+
 ### webpack 无法解析vue-jsx语法
 ```bash
 npm install --save-dev babel-plugin-syntax-jsx babel-plugin-transform-vue-jsx

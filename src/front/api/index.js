@@ -55,3 +55,12 @@ export function deleteRoom (roomName) {
     method: 'delete'
   })
 }
+
+// 新增用户
+export function addUser (data) {
+  return makeRequest({
+    url: '/api/addUser',
+    method: 'post',
+    data
+  })
+}

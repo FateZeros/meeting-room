@@ -10,7 +10,7 @@ router.post('/login', (req, res) => {
   const { username, password } = req.body
   User.findOne({ username }, 'passwd', (err, user) => {
     if (err) {
-      res.send({ code: 50003, msg: '未知错误' })
+      res.send({ code: 50003, msg: '服务器故障' })
     }
     if (!user) {
       res.send({ code: 40001, msg: '用户名不存在' })

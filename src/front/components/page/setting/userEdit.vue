@@ -10,6 +10,13 @@
 		  </el-row>
 		  <el-row>
 				<el-col :span="10">
+					<el-form-item label="用户邮箱" prop="userEmail">
+				    <el-input v-model="form.userEmail" placeholder="请输入用户邮箱"></el-input>
+				  </el-form-item>
+		  	</el-col>
+		  </el-row>
+		  <el-row>
+				<el-col :span="10">
 					<el-form-item label="部门">
 				    <el-cascader
 					    :options="orgOptions"
@@ -22,18 +29,11 @@
 		  </el-row>
 		  <el-row>
 				<el-col :span="10">
-					<el-form-item label="用户邮箱" prop="userEmail">
-				    <el-input v-model="form.userEmail" placeholder="请输入用户邮箱"></el-input>
-				  </el-form-item>
-		  	</el-col>
-		  </el-row>
-		  <el-row>
-				<el-col :span="10">
 					<el-form-item label="用户权限" prop="userRight">
 				     <el-select v-model="form.userRight" placeholder="请选择用户权限" style="width: 100%;">
-				     		<el-option label="超级管理员" value="super"></el-option>
-      					<el-option label="部门主管" value="master"></el-option>
-      					<el-option label="普通用户" value="general"></el-option>
+				     		<el-option label="超级管理员" value="role_1"></el-option>
+      					<el-option label="部门主管" value="role_2"></el-option>
+      					<el-option label="普通用户" value="role_3"></el-option>
 				     </el-select>
 				  </el-form-item>
 		  	</el-col>
@@ -41,7 +41,7 @@
 		  <el-row>
 			  <el-form-item>
 			    <el-button type="primary" @click="onSubmit">保存</el-button>
-			    <el-button @click="onCancel">取消</el-button>
+			    <el-button @click="onCancel">返回</el-button>
 			  </el-form-item>
 		  </el-row>
 		</el-form>
@@ -57,6 +57,8 @@ const options = [{
     label: '设计原则'
   }]
 }]
+
+import { addUser } from '@/front/api'
 
 export default {
   data () {
@@ -92,7 +94,26 @@ export default {
     onSubmit () {
       this.$refs.form.validate((valid) => {
         if (valid) {
-          console.log('submit')
+          const formData = {
+            userName: this.form.userName,
+            userEmail: this.form.userEmail,
+            userRight: this.form.userRight
+          }
+          addUser(formData)
+          .then(({ msg }) => {
+            this.$message({
+              message: msg,
+              type: 'success',
+              duration: 2000
+            })
+          })
+          .catch(({ code, msg }) => {
+            this.$message({
+              message: msg,
+              type: 'error',
+              duration: 2000
+            })
+          })
         } else {
           return false
         }
