@@ -16,6 +16,10 @@
 		  			<el-input placeholder="请输入姓名"></el-input>
 				  </el-form-item>
 		  	</el-col>
+		  	<el-col :span="6">
+		  		<el-button type="primary" style="margin-left: 16px;">查询</el-button>
+		  		<el-button type="primary" @click="handleAddUser">新增用户</el-button>
+		  	</el-col>
 		 	</el-row>
 		</el-form>
 		<el-table
@@ -46,7 +50,7 @@
         width="200px"
        >
         <template scope="scope">
-          <el-button type="text" size="small" @click="onEditUser">编辑</el-button>
+          <el-button type="text" size="small" @click="onEditUser(scope.row.userId)">编辑</el-button>
           <el-button type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -65,6 +69,7 @@ const options = [{
 }]
 
 const userTable = [{
+  userId: 'user-1',
   username: 'user1',
   department: '部门A',
   email: '49029032@qq.com',
@@ -86,8 +91,11 @@ export default {
     handleChange (value) {
       console.log(value)
     },
-    onEditUser () {
-      this.$router.push({ path: '/set-user/edit' })
+    handleAddUser () {
+      this.$router.push({ name: 'userEdit' })
+    },
+    onEditUser (userId) {
+      this.$router.push({ name: 'userEdit', query: { userId } })
     }
   }
 }

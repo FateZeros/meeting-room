@@ -44,6 +44,7 @@ export default new Router({
         },
         {
           path: '/set-user/edit',
+          name: 'userEdit',
           component: UserEdit
         },
         {
