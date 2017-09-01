@@ -12,6 +12,7 @@ const userSchema = new Schema({
     type: String,
     require: true
   },
+  userImg: String,
   mobile: String,
   email: String,
   roleId: String,

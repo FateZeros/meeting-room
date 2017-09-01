@@ -3,6 +3,7 @@
     "type": "User",
     "username": "Lily",
     "passwd": "123",
+    "userImg": "/static/imgs/users/defaultUser.jpeg",
     "mobile": "18627716271",
     "email": "490293266@qq.com",
     "roleId": "role_1"
@@ -11,6 +12,7 @@
     "type": "User",
     "username": "Lucy",
     "passwd": "123",
+    "userImg": "/static/imgs/users/defaultUser.jpeg",
     "mobile": "18627716271",
     "email": "490293266@qq.com",
     "roleId": "role_1"

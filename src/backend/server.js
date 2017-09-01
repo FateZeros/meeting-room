@@ -28,7 +28,13 @@ app.set('port', (process.env.port || 6633))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+//加载静态资源
+app.use(express.static(path.join(__dirname, 'static')))
+//加载 图片静态资源
+app.use('/static/imgs', express.static(path.join(__dirname, 'assets')))
+
 routes(app)
+
 app.use(function(req, res) {
   res.status(404).end()
 })

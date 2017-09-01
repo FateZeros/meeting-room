@@ -7,6 +7,8 @@ const config = require('../config')
 const credentials = require('../credentials')
 const emailService = require('../lib/sendEmail.js')(credentials)
 
+const bcrypt = require('bcrypt')
+
 // 用户新增
 // 新增时，默认密码123
 // 根据邮箱来判定唯一值
@@ -24,13 +26,14 @@ router.post('/addUser', (req, res) => {
 				username: userName,
 				passwd: 123,
 				email: userEmail,
-				roleId: userRight
+				roleId: userRight,
+				userImg: '/static/imgs/users/defaultUser.jpeg'
 			}).save((err) => {
 	  		if (err) {
 	  			return res.send({ code: 50001, msg: '数据库故障' })
 	  		}
 	  		//发送邮件
-	  	// 	const msgBody = `Hello ${userName}`
+	  	  // const msgBody = `Hello ${userName}`
 				// emailService.send(userEmail, '恭喜您成为xx的成员！', msgBody)
 	  		res.json({ code: 200, msg: '添加用户成功' })
 	  	}) 
@@ -114,7 +117,32 @@ router.post('/user', (req, res) => {
 
 // 重置密码
 router.post('/resetpwd', (req, res) => {
-	// const { email } = req.body
+	const { email } = req.body
+	User.findOne({ email }, (err) => {
+	  if (err) {
+	    res.send({ code: 50003, msg: '服务器故障' })
+	  } else {
+			const defaultPwd = bcrypt.hashSync('123', 10)
+	    User.update(
+	      { email },
+	      { 
+	      	$set: {
+	      		passwd: defaultPwd
+	      	}
+	      },
+	      { upsert: true },
+	      (err) => {
+	      	if (err) {
+	      		return res.send({ code: 50001, msg: '数据库故障' })
+	      	}
+	      	//发送邮件
+	  	  	// const msgBody = `Hello ${userName}，您的密码已重置为初始密码！`
+					// emailService.send(email, '重置密码', msgBody)
+	      	res.json({ code: 200, msg: '重置密码成功' })
+	      }
+	    )
+	  }
+	})
 })
 
 module.exports = router

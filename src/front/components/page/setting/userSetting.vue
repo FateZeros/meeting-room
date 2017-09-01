@@ -122,6 +122,13 @@ export default {
         type: 'warning'
       }).then(() => {
         resetPasswd(email)
+        .then(({ msg }) => {
+          this.$message({
+            message: msg,
+            type: 'success',
+            duration: 2000
+          })
+        })
       })
     }
   },
