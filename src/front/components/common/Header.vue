@@ -2,9 +2,9 @@
   <div class="header">
 	 <div class="logo">会议室预约系统</div>
    <div class="user-info">
-      <el-dropdown trigger="click">
+      <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
-          <img class="user-logo" :src="userImg"/>
+          <img class="user-img" :src="userImg"/>
           {{username}}
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -18,17 +18,24 @@
 <script>
 export default {
   created () {
-    const userInfo = {
-      username: 'YJF',
-      userImg: 'http://localhost:6633/static/imgs/users/defaultUser.jpeg'
-    }
-    localStorage.setItem('MEETING_INFO', JSON.stringify(userInfo))
+    // const userInfo = {
+    //   username: 'YJF',
+    //   userImg: 'http://localhost:6633/static/imgs/users/defaultUser.jpeg',
+    //   role_id: 'role_1'
+    // }
+    // localStorage.setItem('MEETING_INFO', JSON.stringify(userInfo))
   },
   data () {
     const { username, userImg } = JSON.parse(localStorage.getItem('MEETING_INFO'))
     return {
       username,
       userImg
+    }
+  },
+  methods: {
+    handleCommand (command) {
+      if (command === 'loginout') {
+      }
     }
   }
 }
@@ -64,7 +71,7 @@ export default {
   vertical-align: middle;
 }
 
-.user-info .user-logo{
+.user-info .user-img{
   position: absolute;
   left:0;
   top:15px;

@@ -8,7 +8,7 @@ const config = require('../config')
 //登录
 router.post('/login', (req, res) => {
   const { username, password } = req.body
-  User.findOne({ username }, 'passwd', (err, user) => {
+  User.findOne({ username }, (err, user) => {
     if (err) {
       res.send({ code: 50003, msg: '服务器故障' })
     }
@@ -31,8 +31,12 @@ router.post('/login', (req, res) => {
               res.json({
                 code: 200,
                 msg: '登录成功',
-                token: 'Bearer' + token,
-                name: username
+                records: {
+                  token,
+                  username: user.username,
+                  userImg: user.userImg,
+                  userRole: user.roleId
+                }
               })
             }
           )

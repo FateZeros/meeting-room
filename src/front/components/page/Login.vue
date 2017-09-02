@@ -46,11 +46,16 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log('submit', this.loginForm.userName, this.loginForm.password)
-          // this.$http.post('/api/login').then(res => {
-          //   console.log(res)
-          // })
           const LoginData = { username: this.loginForm.userName, password: this.loginForm.password }
-          Login(LoginData).then(() => {
+          Login(LoginData).then(({ records: { username, userImg, userRole, token } }) => {
+            // 登录成功 用户信息
+            const loginUser = {
+              username,
+              userImg,
+              userRole,
+              token
+            }
+            localStorage.setItem('MEETING_INFO', JSON.stringify(loginUser))
             this.$router.push({ path: '/home' })
           }).catch(({ code, msg }) => {
             if (code === -1) {
