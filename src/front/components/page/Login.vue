@@ -51,7 +51,7 @@ export default {
             // 登录成功 用户信息
             const loginUser = {
               username,
-              userImg,
+              userImg: 'http://192.168.1.54:6633' + userImg,
               userRole,
               token
             }

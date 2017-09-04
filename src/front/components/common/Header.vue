@@ -9,6 +9,7 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="loginout">退出</el-dropdown-item>
+          <el-dropdown-item command="loginout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -26,7 +27,11 @@ export default {
     // localStorage.setItem('MEETING_INFO', JSON.stringify(userInfo))
   },
   data () {
-    const { username, userImg } = JSON.parse(localStorage.getItem('MEETING_INFO'))
+    let userInfo = localStorage.getItem('MEETING_INFO')
+    if (userInfo) {
+      userInfo = JSON.parse(userInfo)
+    }
+    let { username = '', userImg = '' } = userInfo
     return {
       username,
       userImg
@@ -35,6 +40,8 @@ export default {
   methods: {
     handleCommand (command) {
       if (command === 'loginout') {
+        localStorage.setItem('MEETING_INFO', '')
+        this.$router.push('/login')
       }
     }
   }
@@ -74,10 +81,12 @@ export default {
 .user-info .user-img{
   position: absolute;
   left:0;
-  top:15px;
+  // top:15px;
   width:40px;
   height:40px;
   border-radius: 50%;
+  top: 50%;
+  margin-top: -20px;
 }
 
 .el-dropdown-menu__item{

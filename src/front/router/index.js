@@ -14,6 +14,8 @@ import SetOrg from '@/front/components/page/setting/orgSetting.vue'
 
 import UserEdit from '@/front/components/page/setting/userEdit.vue'
 
+import Page404 from '@/front/components/page/404.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +62,14 @@ export default new Router({
     {
       path: '/register',
       component: Register
+    },
+    {
+      path: '/404',
+      component: Page404
+    },
+    {
+      path: '*',
+      redirect: '/404'
     }
   ]
 })

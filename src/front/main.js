@@ -12,6 +12,22 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'   // 默认主题
 Vue.use(ElementUI)
 
+// 注册全局钩子
+router.beforeEach((to, from, next) => {
+  const userInfo = localStorage.getItem('MEETING_INFO')
+  if (!userInfo) {
+    // 无登录信息
+    console.log(userInfo)
+    if (to.path !== '/login' && to.path !== '/register') {
+      next('/login')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
