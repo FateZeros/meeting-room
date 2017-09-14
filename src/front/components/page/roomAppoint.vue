@@ -2,7 +2,7 @@
 	<div>
 		<el-form label-width="80px" :model="form" :rules="rules" ref="appointForm">
 			<el-row>
-				<el-col :span="7">
+				<el-col :span="7" v-if="userRole !== 'role_3'">
 					<el-form-item label="会议室" prop="room">
 						<el-select v-model="form.room" placeholder="请选择会议室">
 				      <el-option
@@ -27,7 +27,7 @@
 					</el-form-item>
 				</el-col>
 			</el-row>
-			<el-row>
+			<el-row v-if="userRole !== 'role_3'">
 				<el-col :span="7">
 					<el-form-item label="开始时间" prop="startTime" required>
 						<el-time-select
@@ -76,6 +76,14 @@ import { dateFormat, getKeyByValue } from '@/front/utils'
 import appointTime from '@/front/utils/appointTime.js'
 
 export default {
+  created () {
+    let userInfo = localStorage.getItem('MEETING_INFO')
+    if (userInfo) {
+      userInfo = JSON.parse(userInfo)
+      this.userRole = userInfo.userRole
+    }
+    this.getRoomListData()
+  },
   data () {
     return {
       form: {
@@ -100,11 +108,9 @@ export default {
         }
       },
       choosedDay: dateFormat(new Date(), 'yyyy-MM-dd'),
-      RoomList: []
+      RoomList: [],
+      userRole: 'role_3'
     }
-  },
-  created () {
-    this.getRoomListData()
   },
   methods: {
     onSubmit (formName) {

@@ -1,6 +1,22 @@
-# meeting-room
+![](https://img.shields.io/badge/javaScript-vue-brightgreen.svg)
+![](https://img.shields.io/badge/css-elementUI-yellow.svg)
+![](https://img.shields.io/badge/db-mongondb-blue.svg)
+> vue express mongodb mongoose
 
-> vue express mongodb
+## meeting-room 会议室预约OA系统
+
+基于`vue.js+mongodb+express+Element UI+g2` 构建的会议室预约管理系统
+
+## 功能
+
+- [x] 实现会议室的预约，并用图表展现预约情况
+- [x] 实现会议室管理，用户管理功能
+- [] 预约查询管理，取消预约功能
+- [] 使用发送邮件功能，通知与会人员 
+
+<img src="https://github.com/FateZeros/meeting-room/screenshots/room1.png" width="1270px;" height="608px;"/>
+
+## 目录结构
 
 ## 构建项目
 ``` bash
@@ -13,7 +29,7 @@ vue init webpack project-name
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080
+# serve with hot reload at localhost:3366
 npm run dev
 
 # build for production with minification

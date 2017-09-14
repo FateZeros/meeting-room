@@ -4,8 +4,7 @@ const router = express.Router()
 const Room = require('../models/room')
 const config = require('../config')
 
-router.get('/myAppoint/:params', (req, res) => {
-  console.log(req.params)
+router.get('/myAppoint', (req, res) => {
   Room.find({}, (err, myAppointList) => {
     if (err) {
       res.send({ code: 50003, msg: '未知错误' })

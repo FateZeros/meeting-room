@@ -3,6 +3,8 @@ import Router from 'vue-router'
 
 import Login from '@/front/components/page/Login.vue'
 import Register from '@/front/components/page/Register.vue'
+import Updatepwd from '@/front/components/page/Updatepwd.vue'
+
 import Home from '@/front/components/page/Home.vue'
 import RoomAppoint from '@/front/components/page/roomAppoint.vue'
 
@@ -52,6 +54,10 @@ export default new Router({
         {
           path: '/set-org',
           component: SetOrg
+        },
+        {
+          path: '/updatepwd',
+          component: Updatepwd
         }
       ]
     },

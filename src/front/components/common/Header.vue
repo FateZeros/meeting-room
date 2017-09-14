@@ -9,7 +9,7 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item command="loginout">退出</el-dropdown-item>
-          <el-dropdown-item command="loginout">退出</el-dropdown-item>
+          <el-dropdown-item command="updatepwd">修改密码</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -18,14 +18,6 @@
 
 <script>
 export default {
-  created () {
-    // const userInfo = {
-    //   username: 'YJF',
-    //   userImg: 'http://localhost:6633/static/imgs/users/defaultUser.jpeg',
-    //   role_id: 'role_1'
-    // }
-    // localStorage.setItem('MEETING_INFO', JSON.stringify(userInfo))
-  },
   data () {
     let userInfo = localStorage.getItem('MEETING_INFO')
     if (userInfo) {
@@ -42,6 +34,9 @@ export default {
       if (command === 'loginout') {
         localStorage.setItem('MEETING_INFO', '')
         this.$router.push('/login')
+      }
+      if (command === 'updatepwd') {
+        this.$router.push('/updatepwd')
       }
     }
   }
