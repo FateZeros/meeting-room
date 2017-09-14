@@ -14,7 +14,7 @@
 - [] 预约查询管理，取消预约功能
 - [] 使用发送邮件功能，通知与会人员 
 
-<img src="https://github.com/FateZeros/meeting-room/screenshots/room1.png" width="1270px;" height="608px;"/>
+<img src="https://github.com/FateZeros/meeting-room/blob/master/screenshots/room1.png" height="608px;"/>
 
 ## 目录结构
 
