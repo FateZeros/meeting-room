@@ -11,12 +11,86 @@
 
 - [x] 实现会议室的预约，并用图表展现预约情况
 - [x] 实现会议室管理，用户管理功能
-- [] 预约查询管理，取消预约功能
-- [] 使用发送邮件功能，通知与会人员 
+- [ ] 预约查询管理，取消预约功能
+- [ ] 使用发送邮件功能，通知与会人员
 
-<img src="https://github.com/FateZeros/meeting-room/blob/master/screenshots/room1.png" height="608px;"/>
+<img src="https://github.com/FateZeros/meeting-room/blob/master/screenshots/room1.png" />
+<img src="https://github.com/FateZeros/meeting-room/blob/master/screenshots/room2.png" />
 
 ## 目录结构
+```
+.
+├── README.md
+├── config
+│   ├── dev.env.js
+│   ├── index.js
+│   ├── prod.env.js
+│   └── test.env.js
+├── index.html
+├── package.json
+├── src
+│   ├── backend                     #后台连接mongodb提供api
+│   │   ├── assets
+│   │   │   └── users
+│   │   ├── config.js
+│   │   ├── credentials.js          #证书
+│   │   ├── lib
+│   │   │   └── sendEmail.js        #发送邮件
+│   │   ├── mockData                #mock数据
+│   │   │   ├── room.js
+│   │   │   ├── room.json
+│   │   │   ├── roomList.js
+│   │   │   ├── roomList.json
+│   │   │   ├── user.js
+│   │   │   └── user.json
+│   │   ├── models                  #mongodb models
+│   │   │   ├── room.js
+│   │   │   ├── roomList.js
+│   │   │   └── user.js
+│   │   ├── routes                  #api
+│   │   │   ├── index.js
+│   │   │   ├── login.js
+│   │   │   ├── myAppoint.js
+│   │   │   ├── room.js
+│   │   │   ├── roomList.js
+│   │   │   └── user.js
+│   │   └── server.js               #后台服务
+│   └── front                       #前端资源文件
+│       ├── App.vue
+│       ├── api
+│       │   └── index.js
+│       ├── assets
+│       │   └── logo.png
+│       ├── components
+│       │   ├── chart
+│       │   ├── common
+│       │   └── page
+│       ├── main.js
+│       ├── router
+│       │   └── index.js
+│       └── utils
+│           ├── appointTime.js
+│           ├── index.js
+│           └── restApi.js
+├── static
+│   └── imgs
+│       └── login-bg.jpg
+└── test
+    ├── e2e
+    │   ├── custom-assertions
+    │   │   └── elementCount.js
+    │   ├── nightwatch.conf.js
+    │   ├── runner.js
+    │   └── specs
+    │       └── test.js
+    └── unit
+        ├── index.js
+        ├── karma.conf.js
+        └── specs
+            └── Hello.spec.js
+
+
+```
 
 ## 构建项目
 ``` bash
@@ -90,7 +164,6 @@ npm install --save-dev babel-plugin-syntax-jsx babel-plugin-transform-vue-jsx
 在.babelrc中添加
 "plugins": ["transform-vue-jsx"]
 
-## 项目目录规划
 
 ## github 添加已存在的项目到Github
 ``` bash
@@ -99,6 +172,4 @@ git push -u origin master
 
 
 ## 参考
-[chart.js](https://github.com/chartjs/Chart.js)
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+[Element UI](http://element.eleme.io/#/zh-CN)
